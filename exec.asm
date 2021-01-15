@@ -34,7 +34,7 @@ start:
            ldn     ra                  ; check for nonzero byte
            lbnz    good                ; jump if non-zero
            sep     scall               ; otherwise display usage
-           dw      f_inmsg
+           dw      o_inmsg
            db      'Usage: exec address',10,13,0
            sep     sret                ; return to os
 good:      ghi     ra                  ; copy argument address to rf
