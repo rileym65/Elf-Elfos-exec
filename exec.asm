@@ -9,21 +9,9 @@
 include    bios.inc
 include    kernel.inc
 
-           org     8000h
-           lbr     0ff00h
-           db      'exec',0
-           dw      9000h
-           dw      endrom+2000h
-           dw      7000h
-           dw      endrom-7000h
-           dw      7000h
-           db      0
-
            org     7000h
-           br      start
-
-include    date.inc
-include    build.inc
+begin:     br      start
+           eever
            db      'Written by Michael H. Riley',0
 
 start:
@@ -36,6 +24,7 @@ start:
            sep     scall               ; otherwise display usage
            dw      o_inmsg
            db      'Usage: exec address',10,13,0
+           ldi     0ah
            sep     sret                ; return to os
 good:      ghi     ra                  ; copy argument address to rf
            phi     rf
@@ -57,3 +46,4 @@ jump:      lbr     0                   ; jump to program
 
 endrom:    equ     $
 
+           end     begin
